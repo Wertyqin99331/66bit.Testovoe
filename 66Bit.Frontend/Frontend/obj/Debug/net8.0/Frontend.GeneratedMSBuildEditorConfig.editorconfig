@@ -1,0 +1,55 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Frontend
+build_property.RootNamespace = Frontend
+build_property.ProjectDir = /home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend
+build_property._RazorSourceGeneratorDebug = 
+
+[/home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend/Components/Pages/HomePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Sb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9fSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend/Components/AddFootballerForm.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BZGRGb290YmFsbGVyRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-nvqm1fn3fj
+
+[/home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend/Components/AddTeamForm.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BZGRUZWFtRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-a0zdzd9shj
+
+[/home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend/Components/EditFootballerForm.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9FZGl0Rm9vdGJhbGxlckZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-zaek5kc19s
+
+[/home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend/Components/Layouts/NavLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXRzL05hdkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-ugl2t6e6s3
+
+[/home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend/Components/Pages/FootballersPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Gb290YmFsbGVyc1BhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-rwo5dv1tay

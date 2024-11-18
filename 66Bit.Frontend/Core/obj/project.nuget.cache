@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "hkNRVSrqBEE=",
+  "success": true,
+  "projectFilePath": "/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/Core.csproj",
+  "expectedPackageFiles": [
+    "/home/simofono/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.10/microsoft.aspnetcore.app.ref.8.0.10.nupkg.sha512"
+  ],
+  "logs": []
+}

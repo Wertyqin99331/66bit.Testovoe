@@ -1,0 +1,72 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+::deep .add_team_form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.add_team_form label {
+    display: block;
+    font-weight: bold;
+}
+
+.add_team_form ::deep input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.add_team_form ::deep button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-right: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add_team_form ::deep button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.add_team_form ::deep button[type="button"] {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add_team_form ::deep button[type="button"]:hover {
+    background-color: #d32f2f;
+}
+
+.add_team_form .error {
+    color: #d32f2f;
+    font-size: 0.9em;
+    margin-top: 10px;
+}

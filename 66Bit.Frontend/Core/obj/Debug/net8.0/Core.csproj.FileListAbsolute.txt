@@ -1,0 +1,11 @@
+/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/bin/Debug/net8.0/Core.deps.json
+/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/bin/Debug/net8.0/Core.dll
+/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/bin/Debug/net8.0/Core.pdb
+/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/obj/Debug/net8.0/Core.GeneratedMSBuildEditorConfig.editorconfig
+/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/obj/Debug/net8.0/Core.AssemblyInfoInputs.cache
+/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/obj/Debug/net8.0/Core.AssemblyInfo.cs
+/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/obj/Debug/net8.0/Core.csproj.CoreCompileInputs.cache
+/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/obj/Debug/net8.0/Core.dll
+/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/obj/Debug/net8.0/refint/Core.dll
+/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/obj/Debug/net8.0/Core.pdb
+/home/simofono/Development/TestQuestions/66Bit.Frontend/Core/obj/Debug/net8.0/ref/Core.dll

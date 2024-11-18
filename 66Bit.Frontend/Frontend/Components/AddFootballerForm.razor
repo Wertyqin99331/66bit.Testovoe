@@ -1,0 +1,145 @@
+@using CSharpFunctionalExtensions
+@using Frontend.Api
+@using Frontend.Models
+@using global::Core.Models
+@using HttpClient = Frontend.Core.HttpClient
+
+@inject NavigationManager NavigationManager
+@inject TeamsApi TeamsApi;
+@inject IHttpClientFactory HttpClientFactory;
+@inject FootballersApi FootballersApi;
+
+<div>
+
+    <EditForm FormName="AddFootballerForm" Model="@_addFootballerModel" class="add_footballer_form" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator/>
+
+        <div >
+            <label>Имя:</label>
+            <InputText @bind-Value="_addFootballerModel.Name"/>
+            <ValidationMessage For="@(() => _addFootballerModel.Name)"/>
+        </div>
+
+        <div >
+            <label>Фамилия:</label>
+            <InputText @bind-Value="_addFootballerModel.Surname"/>
+            <ValidationMessage For="@(() => _addFootballerModel.Surname)"/>
+        </div>
+
+        <div >
+            <label>Пол:</label>
+            <InputSelect @bind-Value="_addFootballerModel.Gender">
+                <option value="@Gender.Male">Мужской</option>
+                <option value="@Gender.Female">Женский</option>
+            </InputSelect>
+        </div>
+
+        <div >
+            <label>Дата рождения:</label>
+            <InputDate @bind-Value="_addFootballerModel.BirthDate"/>
+        </div>
+
+        <div >
+            <label>Страна:</label>
+            <InputSelect @bind-Value="_addFootballerModel.Country">
+                <option value="" selected disabled hidden>Выберите страну</option>
+                @foreach (var country in Footballer.Countries)
+                {
+                    <option value="@country">@country</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => _addFootballerModel.Country)"/>
+        </div>
+
+        <div >
+            <label>Команда:</label>
+            <InputSelect @bind-Value="_addFootballerModel.TeamId">
+
+                @if (_teamsFetchError)
+                {
+                    <option selected disabled hidden value="">Произошла ошибка при загрузке команд</option>
+                }
+                @if (_teams is null)
+                {
+                    <option selected disabled hidden value="">Загрузка...</option>
+                }
+                else
+                {
+                    <option value="" disabled selected hidden>
+                        Выберите команду
+                    </option>
+                    @foreach (var team in _teams!)
+                    {
+                        <option value=@team.Id>@team.Name</option>
+                    }
+                }
+            </InputSelect>
+
+            
+        </div>
+
+        @*ReSharper disable once CSharpWarnings::CS8974 *@
+        @if (!_isAddTeamFormOpened)
+        {
+        <button onclick="@ToggleAddTeamFormState" type="button">Нет вашей команды? Добавить ее</button>
+        }
+
+        <button type="submit">Добавить игрока</button>
+        <div class="error">@_addFootballerError</div>
+    </EditForm>
+
+
+    @if (_isAddTeamFormOpened)
+    {
+        <AddTeamForm OnTeamAdded="OnTeamAdded" OnClose="ToggleAddTeamFormState"/>
+    }
+</div>
+
+@code {
+    private AddFootballerModel _addFootballerModel = new();
+
+    private List<Team>? _teams = null;
+    private bool _teamsFetchError = false;
+
+    private string? _addFootballerError = null;
+
+    private bool _isAddTeamFormOpened = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchTeams();
+    }
+
+    private async Task FetchTeams()
+    {
+        _teams = null;
+        var result = await TeamsApi.FetchTeamsAsync();
+        result.Match(r => _teams = r, e => _teamsFetchError = true);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        var result = await FootballersApi.AddFootballerAsync(_addFootballerModel);
+        if (result.IsSuccess)
+        {
+            _isAddTeamFormOpened = false;
+            _addFootballerModel = new AddFootballerModel();
+        }
+        else
+        {
+            _addFootballerError = result.Error.Detail;
+        }
+    }
+
+    private void ToggleAddTeamFormState()
+    {
+        _isAddTeamFormOpened = !_isAddTeamFormOpened;
+    }
+
+    private async Task OnTeamAdded()
+    {
+        _isAddTeamFormOpened = false;
+        await FetchTeams();
+    }
+
+}

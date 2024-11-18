@@ -1,0 +1,136 @@
+@using CSharpFunctionalExtensions
+@using Frontend.Api
+@using Frontend.Models
+@using Frontend.Options
+@using global::Core.Models
+@using Microsoft.Extensions.Options
+@using HttpClient = Frontend.Core.HttpClient
+
+@inject IHttpClientFactory HttpClientFactory
+@inject IOptions<ApiConnectionOptions> ApiConnectionOptions
+@inject TeamsApi TeamsApi;
+@inject FootballersApi FootballersApi;
+
+<div class="overlay" @onclick="CloseEditForm">
+    <div class="popup" @onclick:stopPropagation="true">
+        <h3>Редактировать футболиста</h3>
+        <EditForm Model="@_editFootballerModel" OnValidSubmit="HandleSubmit">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+
+            <div>
+                <label for="name">Имя</label>
+                <InputText id="name" class="form-control" @bind-Value="_editFootballerModel.Name"/>
+            </div>
+
+            <div>
+                <label for="surname">Фамилия</label>
+                <InputText id="surname" class="form-control" @bind-Value="_editFootballerModel.Surname"/>
+            </div>
+
+            <div>
+                <label for="gender">Пол</label>
+                <InputSelect id="gender" class="form-control" @bind-Value="_editFootballerModel.Gender">
+                    <option value="Male">Мужской</option>
+                    <option value="Female">Женский</option>
+                </InputSelect>
+            </div>
+
+            <div>
+                <label for="country">Страна</label>
+                <InputSelect @bind-Value="_editFootballerModel.Country" id="country">
+                    @foreach (var country in Footballer.Countries)
+                    {
+                        <option value="@country">@country</option>
+                    }
+                </InputSelect>
+            </div>
+
+            <div>
+                <label for="birthDate">День рождения</label>
+                <InputDate id="birthDate" class="form-control" @bind-Value="_editFootballerModel.BirthDate"/>
+            </div>
+
+            <div>
+                <label for="team">Команда</label>
+                <InputSelect id="team" @bind-Value="_editFootballerModel.TeamId">
+                    @if (_fetchTeamsError is not null)
+                    {
+                        <option value="">@_fetchTeamsError</option>
+                    }
+                    else @if (_teams is null)
+                    {
+                        <option value="">Загрузка</option>
+                    }
+                    else
+                    {
+                        <option value="" disabled selected hidden>Выберите команду</option>
+                        @foreach (var team in _teams)
+                        {
+                            <option value="@team.Id">@team.Name</option>
+                        }
+                    }
+                </InputSelect>
+            </div>
+
+            <div class="popup-buttons">
+                <button type="button" class="btn btn-secondary" @onclick="CloseEditForm">Отмена</button>
+                <button type="submit" class="btn btn-primary">Сохранить измения</button>
+            </div>
+
+            @if (_editFootballerError is not null)
+            {
+                <div>@_editFootballerError</div>
+            }
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Footballer Footballer { get; set; } = null!;
+    [Parameter] public EventCallback<Footballer> OnEditSuccess { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private List<Team>? _teams;
+    private string? _fetchTeamsError;
+
+    private EditFootballerModel _editFootballerModel = null!;
+
+    protected override void OnInitialized()
+    {
+        _editFootballerModel = new EditFootballerModel(Footballer);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchTeams();
+    }
+
+    private async Task FetchTeams()
+    {
+        var result = await TeamsApi.FetchTeamsAsync();
+        result.Match(r => _teams = r, e => _fetchTeamsError = e.Detail);
+    }
+
+    private string? _editFootballerError;
+
+    private async Task HandleSubmit()
+    {
+        _editFootballerError = null;
+
+        var result = await FootballersApi.EditFootballerAsync(Footballer.Id, _editFootballerModel);
+        if (result.IsSuccess)
+        {
+            await OnEditSuccess.InvokeAsync();
+        }
+        else
+        {
+            _editFootballerError = result.Error.Detail;
+        }
+    }
+
+    private void CloseEditForm()
+    {
+        OnClose.InvokeAsync();
+    }
+}

@@ -1,0 +1,45 @@
+@using Frontend.Api
+@using Frontend.Models
+
+@inject TeamsApi TeamApi;
+
+<div class="overlay" @onclick="OnClose">
+    <div class="popup" @onclick:stopPropagation="true">
+        <EditForm Model="@_addTeamModel" OnValidSubmit="HandleValidSubmit" class="add_team_form">
+            <DataAnnotationsValidator/>
+
+            <label>Название команды:</label>
+            <InputText @bind-Value="_addTeamModel.Name"/>
+            <ValidationMessage For="@(() => _addTeamModel.Name)"/>
+
+            <button type="submit">Добавить команду</button>
+            <button type="button" @onclick="() => OnClose.InvokeAsync()">Закрыть форму</button>
+        </EditForm>
+        @if (_addTeamError != null)
+        {
+        <div class="error">@_addTeamError</div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public EventCallback OnTeamAdded { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private readonly AddTeamModel _addTeamModel = new();
+    private string? _addTeamError;
+
+    private async Task HandleValidSubmit()
+    {
+        
+        var result = await TeamApi.AddTeamAsync(_addTeamModel);
+        if (result.IsSuccess)
+        {
+            await OnTeamAdded.InvokeAsync();
+        }
+        else
+        {
+            _addTeamError= result.Error.Detail;
+        }
+    }
+}

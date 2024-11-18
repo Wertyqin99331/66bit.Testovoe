@@ -1,0 +1,126 @@
+@page "/footballers"
+@using Frontend.Api
+@using Frontend.Models
+@using Frontend.Options
+@using global::Core.Hub
+@using global::Core.Models
+@using Microsoft.AspNetCore.SignalR.Client;
+@using Microsoft.Extensions.Options
+
+@inject IOptions<ApiConnectionOptions> ApiConnectionOptions;
+@inject FootballersApi FootballersApi;
+
+<h3>Footballers</h3>
+
+@if (_fetchFootballersError is not null)
+{
+    <div>@_fetchFootballersError</div>
+}
+else
+{
+    @if (_footballers is null)
+    {
+        <div>Идет загрузка...</div>
+    }
+    else
+    {
+        <ul class="footballers_list">
+            @foreach (var footballer in _footballers)
+            {
+                <li class="footballers_item">
+                    <div>@footballer.Name</div>
+                    <div>@footballer.Surname</div>
+                    <div>@footballer.Gender.ToRussianString()</div>
+                    <div>@footballer.Country</div>
+                    <div>@footballer.BirthDate</div>
+                    <div>@footballer.Team.Name</div>
+                    <button class="btn btn-secondary" @onclick="() => OpenEditForm(footballer)">Редактировать футболиста</button>
+                </li>
+            }
+        </ul>
+    }
+}
+
+@if (_selectedFootballer is not null)
+{
+    <EditFootballerForm Footballer="@_selectedFootballer" OnEditSuccess="@(footballer => HandleEditSuccess(footballer))" OnClose="CloseEditForm"/>
+}
+
+@code {
+    private List<Footballer>? _footballers;
+    private string? _fetchFootballersError;
+    private HubConnection? _hubConnection;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchFootballers();
+        await StartFootballersHub();
+    }
+
+    private async Task FetchFootballers()
+    {
+        _footballers = null;
+        _fetchFootballersError = null;
+
+        var result = await FootballersApi.GetFootballersAsync();
+        if (result.IsSuccess)
+        {
+            _footballers = result.Value;
+        }
+        else
+        {
+            _fetchFootballersError = result.Error.Detail;
+        }
+    }
+
+    private async Task StartFootballersHub()
+    {
+        var hubUrl = $"{ApiConnectionOptions.Value.ApiConnectionString}/footballersHub";
+        _hubConnection = new HubConnectionBuilder()
+            .WithUrl(hubUrl)
+            .Build();
+
+        _hubConnection.On<Footballer>(FootballersHubMethods.NewFootballerAdded.ToString(), footballer =>
+        {
+            Console.WriteLine("Got new signal");
+            _footballers?.Add(footballer);
+            InvokeAsync(StateHasChanged);
+        });
+
+        try
+        {
+            await _hubConnection.StartAsync();
+        }
+        catch
+        {
+            Console.WriteLine("Error while hub connection");
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_hubConnection is not null)
+        {
+            await _hubConnection.DisposeAsync();
+        }
+    }
+
+    private Footballer? _selectedFootballer;
+
+    private void OpenEditForm(Footballer footballer)
+    {
+        _selectedFootballer = footballer;
+    }
+
+    private void CloseEditForm()
+    {
+        _selectedFootballer = null;
+    }
+
+    private async Task HandleEditSuccess(Footballer updatedFootballer)
+    {
+        _selectedFootballer = null;
+        await FetchFootballers();
+    }
+
+}

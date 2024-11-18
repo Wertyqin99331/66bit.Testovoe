@@ -1,0 +1,201 @@
+/* _content/Frontend/Components/AddFootballerForm.razor.rz.scp.css */
+[b-nvqm1fn3fj] .add_footballer_form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    row-gap: 10px;
+}
+
+[b-nvqm1fn3fj] .add_footballer_form label {
+    display: block;
+    font-weight: bold;
+}
+
+[b-nvqm1fn3fj] input,
+[b-nvqm1fn3fj] select {
+    width: 100%;
+    padding: 5px 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+[b-nvqm1fn3fj] button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+[b-nvqm1fn3fj] button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.error[b-nvqm1fn3fj] {
+    color: red;
+    font-size: 30px;
+}
+/* _content/Frontend/Components/AddTeamForm.razor.rz.scp.css */
+.overlay[b-a0zdzd9shj] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup[b-a0zdzd9shj] {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+[b-a0zdzd9shj] .add_team_form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.add_team_form label[b-a0zdzd9shj] {
+    display: block;
+    font-weight: bold;
+}
+
+.add_team_form[b-a0zdzd9shj]  input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.add_team_form[b-a0zdzd9shj]  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-right: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add_team_form[b-a0zdzd9shj]  button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.add_team_form[b-a0zdzd9shj]  button[type="button"] {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add_team_form[b-a0zdzd9shj]  button[type="button"]:hover {
+    background-color: #d32f2f;
+}
+
+.add_team_form .error[b-a0zdzd9shj] {
+    color: #d32f2f;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+/* _content/Frontend/Components/EditFootballerForm.razor.rz.scp.css */
+
+.overlay[b-zaek5kc19s] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup[b-zaek5kc19s] {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-buttons[b-zaek5kc19s] {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+button[b-zaek5kc19s] {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+input[type="text"][b-zaek5kc19s],
+input[type="date"][b-zaek5kc19s],
+select[b-zaek5kc19s] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+input[type="text"]:focus[b-zaek5kc19s],
+input[type="date"]:focus[b-zaek5kc19s],
+select:focus[b-zaek5kc19s] {
+    border-color: #555;
+}
+
+label[b-zaek5kc19s] {
+    display: block;
+    margin-bottom: 5px;
+}
+/* _content/Frontend/Components/Layouts/NavLayout.razor.rz.scp.css */
+.main_nav[b-ugl2t6e6s3] {
+    display: flex;
+    column-gap: 10px;
+    padding: 5px 10px;
+    background-color: purple;
+}
+
+.main_nav a[b-ugl2t6e6s3] {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+/* _content/Frontend/Components/Pages/FootballersPage.razor.rz.scp.css */
+.footballers_list[b-rwo5dv1tay] {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    list-style-type: none;
+    gap: 10px;
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+.footballers_item[b-rwo5dv1tay] {
+    border: 1px black solid;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

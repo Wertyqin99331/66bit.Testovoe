@@ -1,0 +1,39 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  "66bit.backend":
+    build:
+      context: "/home/simofono/Development/TestQuestions/66Bit.Frontend"
+      dockerfile: "Backend/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Backend.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "backend:dev"
+    ports: []
+    volumes:
+    - "/home/simofono/.nuget/packages:/home/app/.nuget/packages"
+    - "/home/simofono/Development/TestQuestions/66Bit.Frontend/Backend:/app:rw"
+    - "/home/simofono/Development/TestQuestions/66Bit.Frontend:/src:rw"
+    working_dir: "/app"
+  "66bit.frontend":
+    build:
+      context: "/home/simofono/Development/TestQuestions/66Bit.Frontend"
+      dockerfile: "Frontend/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Frontend.dll"
+    environment:
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net8.0/Frontend.staticwebassets.runtime.CT.json"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "66bit.frontend:dev"
+    ports: []
+    volumes:
+    - "/home/simofono/.nuget/packages:/home/app/.nuget/packages"
+    - "/home/simofono/Development/TestQuestions/66Bit.Frontend/Frontend:/app:rw"
+    - "/home/simofono/Development/TestQuestions/66Bit.Frontend:/src:rw"
+    working_dir: "/app"
